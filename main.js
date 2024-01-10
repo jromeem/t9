@@ -1,11 +1,14 @@
 const fs = require('fs');
 
-// Initializing the word list into memory
-function loadWordList() {
+// Initializing the dictionary with the isWord functionality
+function loadDictionary() {
     try {
         // Synchronously read the file contents and return the word array
         const data = fs.readFileSync('wordlist.10000.txt', 'utf-8');
-        return data.split(/\r?\n/);
+        const wordList = data.split(/\r?\n/);
+        return {
+            isWord: (input) => wordList.includes(input)
+        }
     } catch (err) {
         throw new Error('Failed to load word list:', err);
     }
@@ -24,20 +27,23 @@ function loadWordList() {
 function findWords(input, dict) {
     // TODO: Find all of the words which can be created
     const perms = makePerms(input);
+    console.log(perms);
     const foundWords = filterWords(perms, dict);
     return foundWords;
 }
 
+// filtering out the permutations that are words using the dictionary's isWord function
 function filterWords(listAllPerms, listAllWords) {
-    return listAllPerms.filter((perm) => listAllWords.includes(perm));
+    return listAllPerms.filter(listAllWords.isWord);
 }
 
-// creating the permutations with tail recursion
+// creating the permutations using tail recursion
 function makePerms(input) {
     const perms = [];
     return makePermsRecursive(perms, input);
 }
 
+// tail recursive function
 function makePermsRecursive(perms, input) {
     // representing our phone keyboard
     const keyboard = {
@@ -84,9 +90,9 @@ function makePermsRecursive(perms, input) {
 }
 
 function main() {
-    const input = '4663';
-    const wordList = loadWordList();
-    const validWords = findWords(input, wordList);
+    const input = '23';
+    const dict = loadDictionary();
+    const validWords = findWords(input, dict);
     console.log(validWords);
 }
 
