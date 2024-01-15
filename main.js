@@ -106,8 +106,7 @@ function main() {
     const input = arg;
     const dict = loadDictionary();
     const validWords = findWords(input, dict);
-    console.log('\ninput: ', input);
-    console.log("valid words:\n", validWords);
+    console.log(validWords);
 }
 
 main();
