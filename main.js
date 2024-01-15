@@ -27,7 +27,6 @@ function loadDictionary() {
 function findWords(input, dict) {
     // TODO: Find all of the words which can be created
     const perms = makePerms(input);
-    console.log(perms);
     const foundWords = filterWords(perms, dict);
     return foundWords;
 }
@@ -90,9 +89,10 @@ function makePermsRecursive(perms, input) {
 }
 
 function main() {
-    const input = '23';
+    const input = '4663';
     const dict = loadDictionary();
     const validWords = findWords(input, dict);
+    console.log('\ninput: ', input);
     console.log(validWords);
 }
 
