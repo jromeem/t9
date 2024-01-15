@@ -23,7 +23,6 @@ function loadDictionary() {
  * @param {string} input the sequence of buttons pressed
  * @param {{ isWord: (in: string) => boolean }} dict the dictionary implementation
  */
-
 function findWords(input, dict) {
     // TODO: Find all of the words which can be created
     const perms = makePerms(input);
@@ -88,12 +87,27 @@ function makePermsRecursive(perms, input) {
     }
 }
 
+function isNumeric(str) {
+    return /^[0-9]+$/.test(str);
+}
+
 function main() {
-    const input = '4663';
+    if (process.argv.length < 2) {
+        console.error('Please provide an numeric input argument: [0 - 9]');
+        process.exit(1);
+    }
+    
+    const arg = process.argv[2];
+    if (!isNumeric(arg)) {
+        console.error('Please provide an numeric input argument: [0 - 9]');
+        process.exit(1);
+    }
+
+    const input = arg;
     const dict = loadDictionary();
     const validWords = findWords(input, dict);
     console.log('\ninput: ', input);
-    console.log(validWords);
+    console.log("valid words:\n", validWords);
 }
 
 main();
