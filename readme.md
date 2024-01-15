@@ -5,5 +5,5 @@ Word Finder is a JavaScript program that finds all valid words, according to a p
 
 ## Usage
 Clone this repo then run the program using Node.js with a numeric input:  
-` $ node main.js 4663`
+` $ node main.js 4663`  
 `>> [ 'gone', 'good', 'home', 'hood' ]`
